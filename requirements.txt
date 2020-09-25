@@ -3,4 +3,4 @@ click
 pytest
 pandas
 numpy
-google-cloud
+google
