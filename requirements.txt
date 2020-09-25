@@ -1,0 +1,6 @@
+pylint
+click
+pytest
+pandas
+numpy
+google.cloud
