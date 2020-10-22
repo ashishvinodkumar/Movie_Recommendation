@@ -173,7 +173,10 @@ if __name__ == "__main__":
     
     your_pick = sys.argv[1]
     whole_df = load_content_rec_data()
-    your_pick_df = identify_movie(your_pick, whole_df)   
+    your_pick_df = identify_movie(your_pick, whole_df)  
+    
+    if len(your_pick_df) == 0:
+        raise Exception('\nNo movies exist with the movie keyword you specified. \nPlease try again with a different movie.\n')
     
     is_valid_index, val = get_one_move(your_pick_df)
         
