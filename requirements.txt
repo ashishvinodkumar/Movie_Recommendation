@@ -6,3 +6,5 @@ numpy
 google
 google.cloud
 google.cloud.bigquery
+sklearn
+scipy
