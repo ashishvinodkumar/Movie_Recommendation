@@ -6,6 +6,6 @@ test:
 	python -m pytest -vv test_movie_rec.py
 
 lint:
-	python movie_rec.py --title "Jumanji"
+	pylint --disable=R,C,W app/app.py
 
 all: install lint test
