@@ -1,3 +1,10 @@
+#########################################################################################################
+# Notes
+# 1. "Sky High" bug. Fixed
+# 2. Search multiple words movie. 
+# 3. Resolve output of movies with same name. Ex Sky High 2005 vs Sky High 2003. Fixed
+#########################################################################################################
+
 import numpy as np
 import pandas as pd
 import re
@@ -8,6 +15,7 @@ from sklearn import metrics
 from scipy.sparse import csr_matrix
 import sys
 import os
+import click
 
 
 # ### Import Dataset
@@ -28,7 +36,8 @@ def get_one_move(your_pick_df):
     for i in range(len(your_pick_df)):
         cur_row = your_pick_df.iloc[i]
         movie = cur_row['title']
-        print(i,' :  ', movie)
+        year = cur_row['year']
+        print(i,' :   ', movie, ' ('+str(year)+')')
     
     val = int(input('\nPlease pick 1 movie id from the list of movie ids displayed below: '))
     is_valid_index = True
@@ -44,7 +53,7 @@ def subset_by_genre(your_pick, whole_df):
     genres = list(genres)[0].split(', ')
     masks = []
     for genre in genres:
-        mask = whole_df['genre'].str.contains(genre)
+        mask = whole_df['genre'].str.contains(genre, na=False)
         masks.append(mask)
     mask = masks[0]
     for i in range(1,len(masks)):
@@ -69,11 +78,13 @@ def subset_by_language(your_pick, whole_df):
     languages = list(languages)[0].split(', ')
     masks = []
     for language in languages:
-        mask = whole_df['language'].str.contains(language)
+        mask = whole_df['language'].str.contains(language, na=False)
         masks.append(mask)
     mask = masks[0]
+
     for i in range(1,len(masks)):
         mask = mask | masks[i]
+
     return whole_df[mask]
 
 
@@ -165,13 +176,12 @@ def format_output_to_console(result, num_recommendations=6):
     print('Hope you like our recommendations!\nGoodbye :) \n')
     
 
-if __name__ == "__main__":   
+if __name__ == "__main__":  
     
-    if len(sys.argv) != 2:
-        print('Please enter 1 movie title!')
+    if len(sys.argv) < 2:
         raise Exception('Please enter 1 movie title! You have entered {} titles :('.format(len(sys.argv[1:])))
     
-    your_pick = sys.argv[1]
+    your_pick = ' '.join(sys.argv[1:])
     whole_df = load_content_rec_data()
     your_pick_df = identify_movie(your_pick, whole_df)  
     
@@ -194,5 +204,4 @@ if __name__ == "__main__":
     dist_series = cos_similarity(X, df, your_pick)
     result = recommend_movies(df, dist_series)
     format_output_to_console(result)
-
 
