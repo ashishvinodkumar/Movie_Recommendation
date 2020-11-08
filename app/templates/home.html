@@ -1,0 +1,39 @@
+ <html>
+    <head>
+        <style>
+            body 
+            {
+                background-image: url('static/movie-theater-background.jpg');
+                background-repeat: no-repeat;
+                background-attachment: fixed; 
+                background-size: 100% 100%;
+            }
+            .center 
+            {
+                margin: auto;
+                width: 50%;
+                border: 3px solid black;
+                padding: 10px;
+                opacity:85%;
+                top:50%;
+            }
+            h1 {text-align: center; color:white}
+            h4 {text-align: center; color:white}
+            p {text-align: center; color:white}
+            div {text-align: center;}
+            input {text-align: center; }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="center">
+            <h1 text-align: center;>Welcome to Movie Recommendation Engine!</h1>
+            <h4>Please enter your favorite movie title below to get started:</h4>
+            <form method="POST">
+                <input name="text">
+                <input type="submit">
+            </form>
+        </div>
+    </body>
+    </html>

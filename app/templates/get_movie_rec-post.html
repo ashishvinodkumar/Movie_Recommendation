@@ -1,0 +1,51 @@
+ <html>
+    <head>
+        <style>
+            body 
+            {
+                background-image: url('static/closing.jpg');
+                background-repeat: no-repeat;
+                background-attachment: fixed; 
+                background-size: 100% 100%;
+            }
+            .center 
+            {
+                margin: auto;
+                width: 50%;
+                border: 3px solid black;
+                padding: 10px;
+                opacity:85%;
+                top:50%;
+                -ms-transform: translateY(+50%);
+                transform: translateY(+50%);
+            }
+            h1 {text-align: center; color:white}
+            h4 {text-align: center; color:white}
+            p {text-align: center; color:white}
+            div {text-align: center;}
+            input {text-align: center; }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="center">
+            <h1>Your top recommendations are:</h1>>
+            <p>
+                {% for imdb in imdb_list %}
+                    {{imdb}}
+                {% endfor %}
+
+                {% for title in title_list %}
+                    {{title}}
+                {% endfor %}
+            </p>
+
+            <br><br>Thank you for stopping by!<br>
+            <br>Hope you like our recommendations!<br>Goodbye :)<br>
+            <br>If you liked our recommendations, try again with a different movie!<br>
+            <p align="center"><a href=/home ><button class=grey style="height:75px;width:150px">Click here!</button></a></p>
+
+        </div>
+    </body>
+    </html>

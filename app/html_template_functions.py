@@ -166,16 +166,7 @@ def recommend_movies(df, dist_series):
 
 
 def format_output_to_console(result, num_recommendations=6):
-    
-    print('Your top recommendations are:\n')
-    
-    for i in range(1, num_recommendations):
-        cur_row = result.iloc[i]
-        print('IMDB ID: ', cur_row['IMDBid'], '   |     Title: ', cur_row['Title'])
-        
-    
-    print('\nThank you for stopping by!')
-    print('Hope you like our recommendations!\nGoodbye :) \n')
+    return list(result.iloc[:num_recommendations]['IMDBid']), list(result.iloc[:num_recommendations]['Title'])
     
 def return_search_results(your_pick):
     html = ""
@@ -187,6 +178,17 @@ def return_search_results(your_pick):
     html = get_one_move(your_pick_df)
     return 0, html
     
+def get_recommendations(imdb_id):
+    whole_df = load_content_rec_data()
+    your_pick = str(list(whole_df[whole_df['imdb_title_id'] == imdb_id]['title'])[0])
+    source = subset_by_genre(your_pick, whole_df)
+    source = subset_by_year(your_pick, source)
+    source = subset_by_language(your_pick, source)
+    source = delete_space_in_name_fields(source)
+    X, df = compute_tf_idf(source)
+    dist_series = cos_similarity(X, df, your_pick)
+    result = recommend_movies(df, dist_series)
+    return format_output_to_console(result)
 
 
 if __name__ == "__main__":  
