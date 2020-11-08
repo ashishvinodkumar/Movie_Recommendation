@@ -33,19 +33,20 @@ def identify_movie(your_pick, whole_df):
 
 # Resolve to 1 movie if there are multiple movies.
 def get_one_move(your_pick_df):
-    print('\nHere are movie titles we found, that contain your movie keyword.\n')
+    html = """<b>Here are movie titles we found, that contain your movie 
+    keyword.<br>Please pick 1 movie id from the list of movie ids displayed below:</b><br><br>"""
+
+
     for i in range(len(your_pick_df)):
         cur_row = your_pick_df.iloc[i]
         movie = cur_row['title']
         year = cur_row['year']
-        print(i,' :   ', movie, ' ('+str(year)+')')
+        imdb_id = cur_row['imdb_title_id']
+        #print(i,' :   ', movie, ' ('+str(year)+')')
+        html = html + str(i+1) + ' |   ' +  movie + ' ('+str(year)+')' + ' <br>     IMBD ID: ' + str(imdb_id) + "<br><br>"
     
-    val = int(input('\nPlease pick 1 movie id from the list of movie ids displayed below: '))
-    is_valid_index = True
-    if val >= len(your_pick_df) or val < 0:
-        is_valid_index = False
-    
-    return (is_valid_index, val)
+    print(html)
+    return (html)
         
 
 # Subset Dataset by Genre
@@ -176,6 +177,17 @@ def format_output_to_console(result, num_recommendations=6):
     print('\nThank you for stopping by!')
     print('Hope you like our recommendations!\nGoodbye :) \n')
     
+def return_search_results(your_pick):
+    html = ""
+    whole_df = load_content_rec_data()
+    your_pick_df = identify_movie(your_pick, whole_df) 
+    if len(your_pick_df) == 0:
+        return -1, html
+    
+    html = get_one_move(your_pick_df)
+    return 0, html
+    
+
 
 if __name__ == "__main__":  
     
