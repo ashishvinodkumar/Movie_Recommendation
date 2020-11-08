@@ -21,7 +21,7 @@ import click
 # ### Import Dataset
 def load_content_rec_data():
     # Import movie dataset (combined metadata), subset the data to 10k rows for computational conviencies
-    whole_df = pd.read_csv('gs://movie_dataset/combined_metadata_table.csv')
+    whole_df = pd.read_csv('../notebooks/combined_metadata_table.csv')
     return whole_df
 
 
