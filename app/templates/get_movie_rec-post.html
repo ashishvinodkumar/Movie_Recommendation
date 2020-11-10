@@ -1,4 +1,4 @@
- <html>
+<html>
     <head>
         <style>
             body 
@@ -8,19 +8,12 @@
                 background-attachment: fixed; 
                 background-size: 100% 100%;
             }
-            .center 
-            {
-                margin: auto;
-                width: 50%;
-                border: 3px solid black;
-                padding: 10px;
-                opacity:85%;
-                top:50%;
-                -ms-transform: translateY(+50%);
-                transform: translateY(+50%);
-            }
-            h1 {text-align: center; color:white}
+            h1 {text-align: center; color:white;
+                padding-top: 30px}
+            h2 {text-align: center; color:white}
             h4 {text-align: center; color:white}
+            h3 {text-align: left; color:white;
+                padding-left: 675px; white-space: pre-wrap;}
             p {text-align: center; color:white}
             div {text-align: center;}
             input {text-align: center; }
@@ -30,22 +23,28 @@
 
     <body>
         <div class="center">
-            <h1>Your top recommendations are:</h1>>
+            <h1>Your Top Recommendations Are:</h1><br>
             <p>
-                {% for imdb in imdb_list %}
-                    {{imdb}}
-                {% endfor %}
+                <script>
+                    var imdb_list = '{{imdb_list}}';
+                    imdb_list = imdb_list.replaceAll("&#39;", "");
+                    imdb_list = imdb_list.slice(1, -1).split(',');
+                    var title_list = '{{title_list}}';
+                    title_list = title_list.replaceAll("&#39;", "");
+                    title_list = title_list.slice(1, -1).split(',');
 
-                {% for title in title_list %}
-                    {{title}}
-                {% endfor %}
+                    for (var i = 0; i < imdb_list.length; i++) {
+                        var imdb = String(imdb_list[i]);
+                        var title = String(title_list[i]);
+                        var index = i+1
+                        document.body.innerHTML += '<h3>' + index + ' : ' + imdb + '   |   ' + title + '</h3>';
+                    }
+                    document.body.innerHTML += '<br><br/>';
+                    document.body.innerHTML += '<h2>' + 'Hope you like our recommendations!' + '</h2>';
+                    document.body.innerHTML += '<h2>' + 'Goodbye :)' + '</h2>';
+                    document.body.innerHTML += '<p><a href=/home ><button class=grey style="height:50px;width:150px">Try a new movie</button></a></p>';
+                </script>
             </p>
-
-            <br><br>Thank you for stopping by!<br>
-            <br>Hope you like our recommendations!<br>Goodbye :)<br>
-            <br>If you liked our recommendations, try again with a different movie!<br>
-            <p align="center"><a href=/home ><button class=grey style="height:75px;width:150px">Click here!</button></a></p>
-
         </div>
     </body>
     </html>

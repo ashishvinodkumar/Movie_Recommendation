@@ -14,16 +14,18 @@ def home():
 @app.route('/home', methods=['POST'])
 def home_post():
     your_pick = request.form['text']
-
-    #return return_search_results(your_pick)
-    error_code, html = return_search_results(your_pick)
+    error_code, imdbid_list, movie_list = return_search_results(your_pick)
+    '''
+    #print("ERROR CODE IS", error_code)
     if error_code == -1:
          html = "<h1>Please try a different movie! <br>Search not found...</h1>"
 
     html = html + "<br>" + """
     <p align="center"><a href=get_movie_rec ><button class=grey style="height:75px;width:150px">Click here to Proceed</button></a></p>
     """
-    return html
+    #return html
+    '''
+    return render_template('home-post.html', error_code=error_code, imdbid_list=imdbid_list, movie_list=movie_list)
 
 
 @app.route('/get_movie_rec')

@@ -18,7 +18,7 @@ import os
 import click
 import sys
 
-# ### Import Dataset
+# Import Dataset
 def load_content_rec_data():
     #dir_path = os.path.dirname(os.path.realpath(__file__))
     # Import movie dataset (combined metadata), subset the data to 10k rows for computational conviencies
@@ -28,25 +28,26 @@ def load_content_rec_data():
 
 # Pick A Movie (Fake Search Engine)
 def identify_movie(your_pick, whole_df):
-    return whole_df[whole_df['title'].str.contains(your_pick, flags=re.IGNORECASE, regex=True)]
+    result = whole_df[whole_df['title'].str.contains(your_pick, flags=re.IGNORECASE, regex=True)]
+    result = result.sort_values(by=['year'], ascending=False) # sort movies by recency
+    return result
 
 
-# Resolve to 1 movie if there are multiple movies.
-def get_one_move(your_pick_df):
-    html = """<b>Here are movie titles we found, that contain your movie 
-    keyword.<br>Please pick 1 movie id from the list of movie ids displayed below:</b><br><br>"""
-
-
+# Returns search result
+def get_movies(your_pick_df):
+    movie_list = []
+    imdbid_list = []
     for i in range(len(your_pick_df)):
         cur_row = your_pick_df.iloc[i]
         movie = cur_row['title']
         year = cur_row['year']
+        movie_output = movie + ' ('+str(year)+')'
         imdb_id = cur_row['imdb_title_id']
+        movie_list.append(movie_output)
+        imdbid_list.append(imdb_id)
         #print(i,' :   ', movie, ' ('+str(year)+')')
-        html = html + str(i+1) + ' |   ' +  movie + ' ('+str(year)+')' + ' <br>     IMBD ID: ' + str(imdb_id) + "<br><br>"
-    
-    print(html)
-    return (html)
+        #html = html + str(i+1) + ' |   ' +  movie + ' ('+str(year)+')' + ' <br>     IMBD ID: ' + str(imdb_id) + "<br><br>"
+    return imdbid_list, movie_list
         
 
 # Subset Dataset by Genre
@@ -151,7 +152,7 @@ def cos_similarity(X, df, your_pick):
         dist.append(dot_product_xy/x_time_y) 
     dist_series = pd.Series(dist)
     dist_series = dist_series.sort_values(ascending=False)
-    dist_series.iloc[1:6]
+    dist_series = dist_series.iloc[1:6]
     dist_series = pd.DataFrame(dist_series)
     
     return dist_series
@@ -169,14 +170,13 @@ def format_output_to_console(result, num_recommendations=6):
     return list(result.iloc[:num_recommendations]['IMDBid']), list(result.iloc[:num_recommendations]['Title'])
     
 def return_search_results(your_pick):
-    html = ""
     whole_df = load_content_rec_data()
     your_pick_df = identify_movie(your_pick, whole_df) 
     if len(your_pick_df) == 0:
-        return -1, html
-    
-    html = get_one_move(your_pick_df)
-    return 0, html
+        return -1, [], []
+    imdbid_list, movie_list = get_movies(your_pick_df)
+    #print('SHOW:', movie_list)
+    return 0, imdbid_list, movie_list
     
 def get_recommendations(imdb_id):
     whole_df = load_content_rec_data()

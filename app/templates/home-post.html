@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <style>
+            body 
+            {
+                background-image: url('static/home_post_background.jpg');
+                background-repeat: no-repeat;
+                background-attachment: fixed; 
+                background-size: 100% 100%;
+            }
+            h1 {text-align: center; color:white;
+                padding-top: 30px}
+            h3 {text-align: center; color:white}
+            h4 {text-align: left; color:white;
+                padding-left: 675px; white-space: pre-wrap;}
+            p {text-align: center; color:white}
+            div {text-align: center;}
+            input {text-align: center; }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="center">
+            <p>
+                <script>
+                    var error_code = '{{error_code}}';
+                    //error_code = parseInt(error_code, 10);
+                    //document.body.innerHTML += "<h3>"+error_code+"<h3>";
+                    if (error_code == -1) {
+                        document.body.innerHTML += "<h1>Search not found...</h1><br>";
+                        document.body.innerHTML += '<p><a href=/home ><button class=grey style="height:75px;width:150px">Try again</button></a></p>';
+                    } else {
+                        var imdb_list = '{{imdbid_list}}';
+                        var title_list = '{{movie_list}}';
+                        document.body.innerHTML += '<h1>Search Results</h1>';
+                        document.body.innerHTML += '<h3><br>Please pick your movie and copy its IMDB id displayed above.</br></h3>';
+                        document.body.innerHTML += '<p><a href=/get_movie_rec ><button >Click here to Proceed</button></a></p>';
+                        document.body.innerHTML += '<br>'
+                        document.body.innerHTML += '<h3>Here are movie titles we found:</h3>';
+                        imdb_list = imdb_list.replaceAll("&#39;", "");
+                        imdb_list = imdb_list.slice(1, -1).split(',');
+                        title_list = title_list.replaceAll("&#39;", ""); // remove '
+                        title_list = title_list.replaceAll("&#34;", ""); // remove "
+                        title_list = title_list.replace('/\"/g', "");
+                        title_list = title_list.slice(1, -1).split(',');
+
+                        for (var i = 0; i < imdb_list.length; i++) {
+                            var imdb = String(imdb_list[i]);
+                            var title = String(title_list[i]);
+                            //var title = title.slice(2, -1);
+                            var index = i+1
+                            //document.body.innerHTML += '<h4>'+ title +'</h4>';
+                            document.body.innerHTML += '<h4>' + index + ' : ' + title + '   |   ' + imdb + '</h4>';
+                        }
+                        document.body.innerHTML += '<br></br><br></br><br></br>'
+                    }
+                    //var html = '{{html}}';
+                    //document.body.innerHTML += '<h4>' + html + '</h4>'
+                </script>
+            </p>
+
+        </div>
+    </body>
+    </html>
