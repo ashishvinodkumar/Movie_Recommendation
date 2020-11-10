@@ -14,6 +14,7 @@
             h4 {text-align: left; color:white;
                 padding-left: 700px; white-space: pre-wrap;}
             p {text-align: center; color:white}
+            a {color:white}
             div {text-align: center;}
             input {text-align: center; }
 
@@ -34,7 +35,7 @@
                         var imdb_list = '{{imdbid_list}}';
                         var title_list = '{{movie_list}}';
                         document.body.innerHTML += '<h1>Search Results</h1>';
-                        document.body.innerHTML += '<h3><br>Please pick your movie and copy its IMDB id displayed above.</br></h3>';
+                        document.body.innerHTML += '<h3><br>Please pick your movie and copy its IMDB id displayed next to the title.</br></h3>';
                         document.body.innerHTML += '<p><a href=/get_movie_rec ><button >Click here to Proceed</button></a></p>';
                         document.body.innerHTML += '<br>'
                         document.body.innerHTML += '<h3>Here are movie titles we found:</h3>';
@@ -47,11 +48,11 @@
 
                         for (var i = 0; i < imdb_list.length; i++) {
                             var imdb = String(imdb_list[i]);
+                            imdb = imdb.replaceAll(" ", "");
                             var title = String(title_list[i]);
-                            //var title = title.slice(2, -1);
                             var index = i+1
-                            //document.body.innerHTML += '<h4>'+ title +'</h4>';
-                            document.body.innerHTML += '<h4>' + index + ' : ' + title + '   |   ' + imdb + '</h4>';
+                            var movie_link = 'https://www.imdb.com/title/'+ imdb + '/?ref_=nv_sr_srsg_0';
+                            document.body.innerHTML += '<h4>' + index + ' : ' + '<a href='+movie_link+'>'+title+'</a>'+ '   |   ' + imdb + '</h4>';
                         }
                         document.body.innerHTML += '<br></br><br></br><br></br>'
                     }

@@ -13,7 +13,8 @@
             h2 {text-align: center; color:white}
             h4 {text-align: center; color:white}
             h3 {text-align: left; color:white;
-                padding-left: 675px; white-space: pre-wrap;}
+                padding-left:725px; white-space: pre-wrap}
+            a {color:white}
             p {text-align: center; color:white}
             div {text-align: center;}
             input {text-align: center; }
@@ -35,9 +36,11 @@
 
                     for (var i = 0; i < imdb_list.length; i++) {
                         var imdb = String(imdb_list[i]);
+                        imdb = imdb.replaceAll(" ", "");
                         var title = String(title_list[i]);
                         var index = i+1
-                        document.body.innerHTML += '<h3>' + index + ' : ' + imdb + '   |   ' + title + '</h3>';
+                        var movie_link = 'https://www.imdb.com/title/'+ imdb + '/?ref_=nv_sr_srsg_0';
+                        document.body.innerHTML += '<h3>'+ index + ' : ' + '<a href='+movie_link+'>'+title+'</a></h3>'
                     }
                     document.body.innerHTML += '<br><br/>';
                     document.body.innerHTML += '<h2>' + 'Hope you like our recommendations!' + '</h2>';
