@@ -1,0 +1,8 @@
+pylint
+click
+pytest
+pandas
+numpy
+sklearn
+scipy
+Flask==1.1.2
