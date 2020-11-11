@@ -1,20 +1,22 @@
 steps:
  # Build the container image
  - name: 'gcr.io/cloud-builders/docker'
-   args: ['build', '--tag', 'gcr.io/central-droplet-295015/app']
- # Push the container image to Container Registry
- - name: 'gcr.io/cloud-builders/docker'
-   args: ['push', 'gcr.io/central-droplet-295015/app']
- # Deploy container image to Cloud Run
- - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-   entrypoint: gcloud
-   args:
-   - 'run'
-   - 'deploy'
-   - 'app'
-   - '--image'
-   - 'gcr.io/central-droplet-295015/app'
-   - '--region'
-   - 'us-central1'
-   - '--platform'
-   - 'managed'
+   args: ['build', '-t', 'gcr.io/central-droplet-295015/app:$COMMIT_SHA', '.']
+
+
+#  # Push the container image to Container Registry
+#  - name: 'gcr.io/cloud-builders/docker'
+#    args: ['push', 'gcr.io/central-droplet-295015/app']
+#  # Deploy container image to Cloud Run
+#  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+#    entrypoint: gcloud
+#    args:
+#    - 'run'
+#    - 'deploy'
+#    - 'app'
+#    - '--image'
+#    - 'gcr.io/central-droplet-295015/app'
+#    - '--region'
+#    - 'us-central1'
+#    - '--platform'
+#    - 'managed'
