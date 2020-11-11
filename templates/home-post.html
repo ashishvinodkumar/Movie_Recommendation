@@ -9,10 +9,12 @@
                 background-size: 100% 100%;
             }
             h1 {text-align: center; color:white;
-                padding-top: 30px}
+                padding-top: 3%}
             h3 {text-align: center; color:white}
             h4 {text-align: left; color:white;
-                padding-left: 35%; white-space: pre-wrap;}
+                padding-left: 42%; white-space: pre-wrap;}
+            h6 {text-align: right; color:white;
+                padding-top: 0%; padding-right: 2%}
             p {text-align: center; color:white}
             a {color:white}
             div {text-align: center;}
@@ -32,35 +34,33 @@
                         document.body.innerHTML += "<h1>Search not found...</h1><br>";
                         document.body.innerHTML += '<p><a href=/home ><button class=grey style="height:75px;width:150px">Try again</button></a></p>';
                     } else {
-                        var imdb_list = '{{imdbid_list}}';
-                        var title_list = '{{movie_list}}';
                         document.body.innerHTML += '<h1>Search Results</h1>';
                         document.body.innerHTML += '<h3><br>Please pick your movie and copy its IMDB id displayed next to the title.</br></h3>';
                         document.body.innerHTML += '<p><a href=/get_movie_rec ><button >Click here to Proceed</button></a></p>';
                         document.body.innerHTML += '<br>'
                         document.body.innerHTML += '<h3>Here are movie titles we found:</h3>';
+
+                        var imdb_list = '{{imdbid_list}}';
                         imdb_list = imdb_list.replaceAll("&#39;", "");
                         imdb_list = imdb_list.slice(1, -1).split(',');
-                        title_list = title_list.replaceAll("&#39;", ""); // remove '
-                        title_list = title_list.replaceAll("&#34;", ""); // remove "
-                        title_list = title_list.replace('/\"/g', "");
-                        title_list = title_list.slice(1, -1).split(',');
+
+                        var title_list = '{{movie_list}}';
+                        title_list = title_list.replaceAll("&#34;", "&#39;"); // remove "
+                        title_list = title_list.slice(1, -1).split("&#39;, &#39;");
 
                         for (var i = 0; i < imdb_list.length; i++) {
                             var imdb = String(imdb_list[i]);
                             imdb = imdb.replaceAll(" ", "");
                             var title = String(title_list[i]);
+                            title = title.replace("&#39;", "");
                             var index = i+1
                             var movie_link = 'https://www.imdb.com/title/'+ imdb + '/?ref_=nv_sr_srsg_0';
                             document.body.innerHTML += '<h4>' + index + ' : ' + '<a href='+movie_link+'>'+title+'</a>'+ '   |   ' + imdb + '</h4>';
                         }
-                        document.body.innerHTML += '<br></br><br></br><br></br>'
+                        document.body.innerHTML += '<h6>'+'- By Leon Zhang and Ashish Vinodkumar'+'</h6>'
                     }
-                    //var html = '{{html}}';
-                    //document.body.innerHTML += '<h4>' + html + '</h4>'
                 </script>
             </p>
-
         </div>
     </body>
     </html>

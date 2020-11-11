@@ -22,7 +22,7 @@ import sys
 def load_content_rec_data():
     dir_path = os.path.dirname(os.path.realpath(__file__))
     # Import movie dataset (combined metadata), subset the data to 10k rows for computational conviencies
-    whole_df = pd.read_csv(dir_path+'/../data/combined_metadata_table.csv')
+    whole_df = pd.read_csv(dir_path+'/static/combined_metadata_table.csv')
     return whole_df
 
 
