@@ -15,7 +15,7 @@ steps:
    - '--image'
    - 'gcr.io/central-droplet-295015/app:$COMMIT_SHA'
    - '--region'
-   - 'REGION'
+   - 'us-central1'
    - '--platform'
    - 'managed'
 images:
