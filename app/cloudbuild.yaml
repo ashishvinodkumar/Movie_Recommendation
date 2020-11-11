@@ -8,10 +8,10 @@ steps:
    args:
    - 'run'
    - 'deploy'
+   - 'app'
    - '--image'
    - 'gcr.io/central-droplet-295015/app'
    - '--region'
    - 'us-central1'
    - '--platform'
    - 'managed'
-
