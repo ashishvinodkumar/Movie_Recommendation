@@ -1,7 +1,10 @@
 steps:
  # Build the container image
  - name: 'gcr.io/cloud-builders/docker'
-   args: ['build', 'submit', '--tag', 'gcr.io/central-droplet-295015/app']
+   args: ['build', '--tag', 'gcr.io/central-droplet-295015/app']
+ # Push the container image to Container Registry
+ - name: 'gcr.io/cloud-builders/docker'
+   args: ['push', 'gcr.io/central-droplet-295015/app']
  # Deploy container image to Cloud Run
  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
    entrypoint: gcloud
