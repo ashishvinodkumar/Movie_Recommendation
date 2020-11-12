@@ -11,10 +11,9 @@
             h1 {text-align: center; color:white;
                 padding-top: 3%}
             h3 {text-align: center; color:white}
-            h4 {text-align: left; color:white;
-                padding-left: 42%; white-space: pre-wrap;}
-            h6 {text-align: right; color:white;
-                padding-top: 0%; padding-right: 2%}
+            h4 {color:white; white-space: pre-wrap}
+            h6 {text-align: right; color:white; 
+                position: fixed; bottom: 0;right: 30;}
             p {text-align: center; color:white}
             a {color:white}
             div {text-align: center;}
@@ -24,21 +23,27 @@
     </head>
 
     <body>
-        <div class="center">
-            <p>
+        <script>
+            var error_code = '{{error_code}}';
+            //error_code = parseInt(error_code, 10);
+            //document.body.innerHTML += "<h3>"+error_code+"<h3>";
+            if (error_code == -1) {
+                document.body.innerHTML += "<h1>Search not found...</h1><br>";
+                document.body.innerHTML += '<p><a href=/home ><button class=grey style="height:75px;width:150px">Try again</button></a></p>';
+            } else {
+                document.body.innerHTML += '<h1>Search Results</h1>';
+                document.body.innerHTML += '<h3><br>Please pick your movie and copy its IMDB id displayed next to the title.</br></h3>';
+                document.body.innerHTML += '<p><a href=/get_movie_rec ><button >Copy the IMDBid to proceed</button></a></p>';
+                document.body.innerHTML += '<br>'
+                document.body.innerHTML += '<h3>Here are movie titles we found:</h3>';
+            }
+        </script>
+        <div style="text-align: center; color:white">
+            <div id='result', style="display: inline-block; text-align: left;">
                 <script>
                     var error_code = '{{error_code}}';
-                    //error_code = parseInt(error_code, 10);
-                    //document.body.innerHTML += "<h3>"+error_code+"<h3>";
-                    if (error_code == -1) {
-                        document.body.innerHTML += "<h1>Search not found...</h1><br>";
-                        document.body.innerHTML += '<p><a href=/home ><button class=grey style="height:75px;width:150px">Try again</button></a></p>';
-                    } else {
-                        document.body.innerHTML += '<h1>Search Results</h1>';
-                        document.body.innerHTML += '<h3><br>Please pick your movie and copy its IMDB id displayed next to the title.</br></h3>';
-                        document.body.innerHTML += '<p><a href=/get_movie_rec ><button >Copy the IMDBid to proceed</button></a></p>';
-                        document.body.innerHTML += '<br>'
-                        document.body.innerHTML += '<h3>Here are movie titles we found:</h3>';
+                    if (error_code != -1) {
+                        var results = document.getElementById('result');
 
                         var imdb_list = '{{imdbid_list}}';
                         imdb_list = imdb_list.replaceAll("&#39;", "");
@@ -53,15 +58,18 @@
                             imdb = imdb.replaceAll(" ", "");
                             var title = String(title_list[i]);
                             title = title.replaceAll("&#39;", ""); // remove '
-                            title = title.replaceAll("&#34;", ""); // remove '
+                            title = title.replaceAll("&#34;", ""); // remove "
                             var index = i+1
                             var movie_link = 'https://www.imdb.com/title/'+ imdb + '/?ref_=nv_sr_srsg_0';
-                            document.body.innerHTML += '<h4>' + index + ' : ' + '<a href='+movie_link+'>'+title+'</a>'+ '   |   ' + imdb + '</h4>';
+                            results.innerHTML += '<h4>' + index + ' : ' + '<a href='+movie_link+'>'+title+'</a>'+ '   |   ' + imdb + '</h4>';
                         }
-                        document.body.innerHTML += '<h6>'+'- By Leon Zhang and Ashish Vinodkumar'+'</h6>'
+                        document.body.innerHTML += '<br></br><br></br><br></br>'
                     }
                 </script>
-            </p>
+            </div>
+        </div>
+        <div>
+            <h6>By Leon Zhang and Ashish Vinodkumar</h6>
         </div>
     </body>
-    </html>
+</html>

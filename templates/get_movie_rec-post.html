@@ -13,9 +13,9 @@
             h2 {text-align: center; color:white}
             h4 {text-align: center; color:white}
             h3 {text-align: left; color:white;
-                padding-left:45%; white-space: pre-wrap}
-            h6 {text-align: right; color:white;
-                padding-top: 18%; padding-right: 2%}
+                display: inline-block ; white-space: pre-wrap}
+            h6 {text-align: right; color:white; 
+                position: fixed; bottom: 0;right: 30;}
             a {color:white}
             p {text-align: center; color:white}
             div {text-align: center;}
@@ -27,24 +27,22 @@
     <body>
         <div class="center">
             <h1>Your Top Recommendations Are:</h1><br>
-            <p>
-                <script>
-                    //var imdb_list = '{{imdb_list}}';
-                    //imdb_list = imdb_list.replaceAll("&#39;", "");
-                    //imdb_list = imdb_list.slice(1, -1).split(', ');
-                    //var title_list = '{{title_list}}';
-                    //title_list = title_list.slice(1, -1).split('&#39;, ');
-                    //title_list = title_list.replaceAll("&#39;", "");
-                    //title_list = title_list.slice(1, -1).split('&#39;, ');
+        </div>
 
+        
+        <div style="text-align: center; color:white">
+            <div id='result', style="display: inline-block; text-align: left;">
+                <script>
+                    var results = document.getElementById('result');
+        
                     var imdb_list = '{{imdb_list}}';
                     imdb_list = imdb_list.replaceAll("&#39;", "");
                     imdb_list = imdb_list.slice(1, -1).split(',');
-
+        
                     var title_list = '{{title_list}}';
                     title_list = title_list.replaceAll("&#34;", "&#39;"); // remove "
                     title_list = title_list.slice(1, -1).split("&#39;, &#39;");
-
+        
                     for (var i = 0; i < imdb_list.length; i++) {
                         var imdb = String(imdb_list[i]);
                         imdb = imdb.replaceAll(" ", "");
@@ -53,15 +51,17 @@
                         title = title.replaceAll("&#34;", ""); // remove "
                         var index = i+1
                         var movie_link = 'https://www.imdb.com/title/'+ imdb + '/?ref_=nv_sr_srsg_0';
-                        document.body.innerHTML += '<h3>'+ index + ' : ' + '<a href='+movie_link+'>'+title+'</a></h3>'
+                        results.innerHTML += '<h3>'+ index + ' : ' + '<a href='+movie_link+'>'+title+'</a></h3><br>'
                     }
                     document.body.innerHTML += '<br><br/>';
-                    document.body.innerHTML += '<h2>' + 'Hope you like our recommendations!' + '</h2>';
-                    document.body.innerHTML += '<h2>' + 'Goodbye :)' + '</h2>';
-                    document.body.innerHTML += '<p><a href=/home ><button class=grey style="height:50px;width:150px">Try a new movie</button></a></p>';
-                    document.body.innerHTML += '<h6>'+'- By Leon Zhang and Ashish Vinodkumar'+'</h6>'
                 </script>
-            </p>
+            </div>
+        </div>
+        <div>
+            <h2>Hope you like our recommendations!</h2>
+            <h2>Goodbye :)</h2>
+            <p><a href=/home ><button class=grey style="height:50px;width:150px">Try a new movie</button></a></p>
+            <h6>By Leon Zhang and Ashish Vinodkumar</h6>
         </div>
     </body>
-    </html>
+</html>

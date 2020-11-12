@@ -1,6 +1,11 @@
  <html>
     <head>
         <style>
+            #wholepage {
+                width: 900px;
+                margin-left:auto;
+                margin-right:auto;
+            }
             body 
             {
                 background-image: url('static/movie-theater-background.jpg');
@@ -11,8 +16,9 @@
             h1 {text-align: center; color:white;
                 padding-top: 3%}
             h4 {text-align: center; color:white}
-            h6 {text-align: right; color:white;
-                padding-top: 42%; padding-right: 2%}
+            
+            h6 {text-align: right; color:white; 
+                position: fixed; bottom: 0;right: 30;}
             p {text-align: center; color:white}
             div {text-align: center;}
             input {text-align: center; }
@@ -21,15 +27,16 @@
     </head>
 
     <body>
-        <div class="center">
-            <h1 text-align: center;>Welcome to the Movie Recommendation Engine!</h1>
-            <h4>Please provide us a movie you like to get started:</h4>
-            <form method="POST">
-                <input name="text">
-                <input type="submit">
-            </form>
-            <h6>- By Leon Zhang and Ashish Vinodkumar</h6>
+        <div id='wholepage'>
+            <div class="center">
+                <h1 text-align: center;>Welcome to the Movie Recommendation Engine!</h1>
+                <h4>Please provide us a movie you like to get started:</h4>
+                <form method="POST">
+                    <input name="text">
+                    <input type="submit">
+                </form>
+                <h6>By Leon Zhang and Ashish Vinodkumar</h6>
+            </div>
         </div>
-
     </body>
-    </html>
+</html>
