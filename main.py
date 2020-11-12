@@ -17,11 +17,9 @@ def home_post():
     error_code, imdbid_list, movie_list = return_search_results(your_pick)
     return render_template('home-post.html', error_code=error_code, imdbid_list=imdbid_list, movie_list=movie_list)
 
-
 @app.route('/get_movie_rec')
 def get_movie_rec():
     return render_template('get_movie_rec.html')
-
 
 @app.route('/get_movie_rec', methods=['POST'])
 def get_movie_rec_post():

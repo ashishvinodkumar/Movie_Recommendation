@@ -22,18 +22,17 @@
         </style>
     </head>
 
-    <body>
+    <body style="text-align: center">
         <script>
             var error_code = '{{error_code}}';
-            //error_code = parseInt(error_code, 10);
-            //document.body.innerHTML += "<h3>"+error_code+"<h3>";
             if (error_code == -1) {
-                document.body.innerHTML += "<h1>Search not found...</h1><br>";
+                document.body.innerHTML += "<h1>Search Not Found...</h1><br>";
                 document.body.innerHTML += '<p><a href=/home ><button class=grey style="height:75px;width:150px">Try again</button></a></p>';
             } else {
                 document.body.innerHTML += '<h1>Search Results</h1>';
-                document.body.innerHTML += '<h3><br>Please pick your movie and copy its IMDB id displayed next to the title.</br></h3>';
-                document.body.innerHTML += '<p><a href=/get_movie_rec ><button >Copy the IMDBid to proceed</button></a></p>';
+                document.body.innerHTML += '<h3><br>Please pick your movie and paste its IMDB id displayed next to the title.</br></h3>';
+                document.body.innerHTML += '<form action="/get_movie_rec" method="POST"><input name="imbd"><input type="submit"></form>'
+                //document.body.innerHTML += '<p><a href=/get_movie_rec ><button >Copy the IMDBid to proceed</button></a></p>';
                 document.body.innerHTML += '<br>'
                 document.body.innerHTML += '<h3>Here are movie titles we found:</h3>';
             }
