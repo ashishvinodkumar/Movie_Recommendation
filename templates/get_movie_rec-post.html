@@ -49,7 +49,8 @@
                         var imdb = String(imdb_list[i]);
                         imdb = imdb.replaceAll(" ", "");
                         var title = String(title_list[i]);
-                        title = title.replace("&#39;", "");
+                        title = title.replaceAll("&#39;", ""); // remove '
+                        title = title.replaceAll("&#34;", ""); // remove "
                         var index = i+1
                         var movie_link = 'https://www.imdb.com/title/'+ imdb + '/?ref_=nv_sr_srsg_0';
                         document.body.innerHTML += '<h3>'+ index + ' : ' + '<a href='+movie_link+'>'+title+'</a></h3>'
