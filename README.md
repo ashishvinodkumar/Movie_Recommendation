@@ -1,4 +1,4 @@
-# Welcome to the Movie Recommendation Project!!
+# Welcome to the Movie Recommendation Project:
 
 # Introduction: 
 Welcome to the movie recommendation system built by Ashish Vinodkumar and Leon Zhang. We built a clean and user friendly web interface that provides users with movie suggestions based on movies that they pick. The website is built using Flask application with NLP algorithms supporting the backend computations. The application also utilizes cloud services and placed great emphasis on continuous integration and deployment (CI/CD) allowing us to update and make changes effectively. For instructions on running, using the website and setting up continuous deployment on GCP, please look at the instruction sections below. At last, feel free to visit our presentation and demo videos listed below.
@@ -99,14 +99,23 @@ jobs:
 ```
 
 Step 2: Open Cloud Run on GCP console:
+
 Update Memory specification to 512 MiB.
+
 Update Timeout specification to 500 seconds.
+
 Save and Re-Deploy Cloud Run application.
 
+
+
 Step 3: Open Cloud Build on GCP console:
+
 Create a new trigger.
+
 Specify github repository.
+
 Triggered on Master branch.
+
 Deployment specifications already available in: cloudbuild.yaml file.
 
 Step 4: Test CI/CD:
