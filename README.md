@@ -3,9 +3,15 @@
 # Introduction: 
 Welcome to the movie recommendation system built by Ashish Vinodkumar and Leon Zhang. We built a clean and user friendly web interface that provides users with movie suggestions based on movies that they pick. The website is built using Flask application with NLP algorithms supporting the backend computations. The application also utilizes cloud services and placed great emphasis on continuous integration and deployment (CI/CD) allowing us to update and make changes effectively. For instructions on running, using the website and setting up continuous deployment on GCP, please look at the instruction sections below. At last, feel free to visit our presentation and demo videos listed below.
 
+##### Live Website link: https://app-4yyborwtmq-uc.a.run.app/get_movie_rec
+
+![Movie-Recommendation-Home-Screen](https://user-images.githubusercontent.com/26104722/99285690-e19c5a80-2805-11eb-94f9-f90487cc2bcc.png)
 
 
-### Live Website link: https://app-4yyborwtmq-uc.a.run.app/get_movie_rec
+### Youtube Links:
+###### Project Overview and Cloud Architecture: https://youtu.be/TfDCWe--SGo
+###### Live Demo and code walkthrough: https://youtu.be/ko5kjdIpnro
+
 
 ### Running the web application locally: 
 Step 1: Clone github repository:
@@ -28,7 +34,44 @@ Step 4: Run Flask app locally: (Copy link displayed on console on your preffered
 python3 main.py
 ```
 
-# Cloud Architecture
+### Website Navigation Instructions:
+Step 1: Enter a movie title (or the keyword of that movie) that you like in the search bar and hit submit.
+
+Step 2: This brings you to a new webpage of all the search results. If the search is not found, please click “Try again” to retry. If the search is successful, find the movie that you want and copy and paste it's IMDBid (on the right side of the movie title) to the search bar and hit submit to begin search. You could also check the movie summary by clicking the movie title. This will bring you to the IMDB website of that movie.
+
+Step 3: After the computation is finished. You will be redirected to the recommendation result web page. The five movies shown on the page are the movies we recommended based on the movie you gave us. For more info, you could click on the movie title. This will bring you to the IMDB website of that movie.
+
+Step 4: To recommend different movies, hit the “Try a different movie” button.
+
+### Set up Google Cloud Project:
+Step 1: Create new gcp project:
+
+Step 2: Check to see if your console is pointing to the correct project:
+```python
+gcloud projects describe $GOOGLE_CLOUD_PROJECT
+```
+
+Step 3: Set working project if not correct:
+```python
+gcloud config set project $GOOGLE_CLOUD_PROJECT
+```
+
+Step 4: Follow steps 1-4 under "Running the Web Application locally" to set up github repo and test Flask application:
+
+Step 5: In the root project of the folder, replace PROJECT-ID below with your GCP project-id, and build the google cloud containerized flask application:
+```python
+gcloud builds submit --tag gcr.io/<PROJECT-ID>/app
+```
+
+Step 6: In the root folder of the project, replace PROJECT-ID below with your GCP project-id, and run the flask application:
+```python
+gcloud run deploy --image gcr.io/<PROJECT-ID>/app --platform managed
+```
+
+Step 7: Paste the URL link provided on the console, in your preferred browser to run the application!
+
+
+### Cloud Architecture
 
 ![Cloud Architecture](https://user-images.githubusercontent.com/26104722/99284330-20c9ac00-2804-11eb-93d2-915670c0c36b.png)
 
@@ -37,4 +80,4 @@ python3 main.py
 
 
 
-# By Ashish and Leon
+### By Ashish and Leon
